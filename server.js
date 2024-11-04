@@ -18,4 +18,19 @@ app.get('/alunos', (req, res) => {
 });
 
 
+app.put('/alunos/:id', (req, res) => {
+    const { id } = req.params;
+    const { nome, email, nomeCurso } = req.body;
+    const aluno = update(id, { nome, email, nomeCurso });
+    res.json(aluno);
+});
 
+app.delete('/alunos/:id', (req, res) => {
+    const { id } = req.params;
+    remove(id);
+    res.status(204).send();
+});
+
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+});
